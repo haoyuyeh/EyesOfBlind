@@ -51,5 +51,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app will record what you say</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app will transcript what you say</string>
 </dict>
 </plist>
