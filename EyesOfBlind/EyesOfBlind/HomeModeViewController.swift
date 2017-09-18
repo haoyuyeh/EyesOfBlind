@@ -21,6 +21,10 @@ class HomeModeViewController: UIViewController {
     
     // MARK: UIViewController
     
+    override func viewWillAppear(_ animated: Bool) {
+        txtToSpeech.say(txtIn: "in home mode")
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         /*
@@ -42,18 +46,7 @@ class HomeModeViewController: UIViewController {
         // ask authentication for speech recognition
         voiceToText.authentication()
         // voice instruction for how to give voice command
-        while true {
-            if !TextToSpeech.synth.isSpeaking {
-                txtToSpeech.say(txtIn: "in home mode")
-                break
-            }
-        }
-        while true {
-            if !TextToSpeech.synth.isSpeaking {
-                txtToSpeech.say(txtIn: "touch the screen and then start to say command, touch again when finishing speaking")
-                break
-            }
-        }
+        txtToSpeech.say(txtIn: "touch the screen and then start to say command, touch again when finishing speaking")
     }
     /*
      touch screen one time to call run function in SpeechToText class:
@@ -70,6 +63,49 @@ class HomeModeViewController: UIViewController {
     func handleDoubleTap() {
         voiceCommand = ""
         voiceCommand = voiceToText.returnTranscript()
-        print("voice command: \(self.voiceCommand)")
+//        print("voice command: \(self.voiceCommand)")
+        processCommand(command: self.voiceCommand)
+    }
+    
+    /*
+     decide what to do based on the receiving voice command
+     */
+    private func processCommand(command:String) {
+        let commands = command.lowercased()
+        
+        if (commands == Commands.outsideMode) {
+            self.tabBarController?.selectedIndex = 0
+        }else if(commands == Commands.homeMode){
+            txtToSpeech.say(txtIn: "already in home mode")
+        }else if(startWith(sentence: commands, word: Commands.find)) {
+            /*
+             implement finding object code here
+             */
+            let object = retrieveObject(sentence: commands)
+            print(object)
+        }else {
+            txtToSpeech.say(txtIn: "no match command, say again")
+        }
+    }
+    /*
+    determine whether the input sentence starts with the input word
+    if yes, return true
+     */
+    private func startWith(sentence:String, word:String) -> Bool {
+        let sentenceSplit = sentence.components(separatedBy: " ")
+        if(sentenceSplit[0] == word) {
+            return true
+        }else {
+            return false
+        }
+    }
+    /*
+     use to retrieve object name from find command
+     */
+    private func retrieveObject(sentence:String) -> String {
+        // +1 for removing space
+        let index = Commands.find.characters.count + 1
+        let startIndex = sentence.index(sentence.startIndex, offsetBy: index)
+        return sentence.substring(from: startIndex)
     }
 }

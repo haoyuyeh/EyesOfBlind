@@ -17,6 +17,13 @@ class TextToSpeech {
     func say(txtIn:String) {
         let utterance = AVSpeechUtterance(string: txtIn)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        TextToSpeech.synth.speak(utterance)
+        // make sure that the sentence would be spoken
+        while true {
+            if(!TextToSpeech.synth.isSpeaking) {
+                TextToSpeech.synth.speak(utterance)
+                break
+            }
+        }
+        
     }
 }

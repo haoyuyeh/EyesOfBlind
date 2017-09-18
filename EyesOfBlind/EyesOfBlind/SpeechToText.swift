@@ -111,12 +111,7 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
                 self.recognitionTask = nil
                 // when ending the transcription, feedback with a voice instruction
                 if isFinal {
-                    while true {
-                        if !TextToSpeech.synth.isSpeaking {
-                            self.txtToSpeech.say(txtIn: "double touch the screen now")
-                            break
-                        }
-                    }
+                    self.txtToSpeech.say(txtIn: "double touch the screen now")
                 }
             }
         }
@@ -150,21 +145,10 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
     func run() {
         if audioEngine.isRunning {
             stopRecording()
-            while true {
-                if !TextToSpeech.synth.isSpeaking {
-                    self.txtToSpeech.say(txtIn: "finish speaking")
-                    break
-                }
-            }
         } else {
             do {
                 try startRecording()
-                while true {
-                    if !TextToSpeech.synth.isSpeaking {
-                        self.txtToSpeech.say(txtIn: "start to say command")
-                        break
-                    }
-                }
+                self.txtToSpeech.say(txtIn: "start to say command")
             } catch  {
                 print("fail to record\n")
             }

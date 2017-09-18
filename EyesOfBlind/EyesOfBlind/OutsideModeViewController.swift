@@ -21,6 +21,10 @@ class OutsideModeViewController: UIViewController {
     
     // MARK: UIViewController
     
+    override func viewWillAppear(_ animated: Bool) {
+        txtToSpeech.say(txtIn: "in outside mode")
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         /*
@@ -39,21 +43,12 @@ class OutsideModeViewController: UIViewController {
         signleTap.delaysTouchesBegan = true
         doubleTap.delaysTouchesBegan = true
         
-        // ask authentication for speech recognition
+        /*
+         ask authentication for speech recognition
+         */
         voiceToText.authentication()
         // voice instruction for how to give voice command
-        while true {
-            if !TextToSpeech.synth.isSpeaking {
-                txtToSpeech.say(txtIn: "in outside mode")
-                break
-            }
-        }
-        while true {
-            if !TextToSpeech.synth.isSpeaking {
-                txtToSpeech.say(txtIn: "touch the screen and then start to say command, touch again when finishing speaking")
-                break
-            }
-        }
+        txtToSpeech.say(txtIn: "touch the screen and then start to say command, touch again when finishing speaking")
     }
     /*
      touch screen one time to call run function in SpeechToText class:
@@ -70,6 +65,21 @@ class OutsideModeViewController: UIViewController {
     func handleDoubleTap() {
         voiceCommand = ""
         voiceCommand = voiceToText.returnTranscript()
-        print("voice command: \(self.voiceCommand)")
+//        print("voice command: \(self.voiceCommand)")
+        processCommand(command: self.voiceCommand)
+    }
+    /*
+     decide what to do based on the receiving voice command
+     */
+    private func processCommand(command:String) {
+        let commands = command.lowercased()
+        
+        if (commands == Commands.homeMode) {
+            self.tabBarController?.selectedIndex = 1
+        }else if(commands == Commands.outsideMode){
+            txtToSpeech.say(txtIn: "already in outside mode")
+        }else {
+            txtToSpeech.say(txtIn: "no match command, say again")
+        }
     }
 }
