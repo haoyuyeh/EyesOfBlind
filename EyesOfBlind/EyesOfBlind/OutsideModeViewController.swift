@@ -19,7 +19,10 @@ class OutsideModeViewController: UIViewController {
     //use to store the command which is converted from voice
     private var voiceCommand = ""
     
-    // MARK: UIViewController
+    // MARK: UITapGestureRecognizer
+    @IBOutlet var singleTap: UITapGestureRecognizer!
+    @IBOutlet var doubleTap: UITapGestureRecognizer!
+    var canSingleTap = true
     
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in outside mode")
@@ -27,21 +30,8 @@ class OutsideModeViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-         define two gestures for responding different tasks
-         */
-        let signleTap = UITapGestureRecognizer(target: self, action: #selector(OutsideModeViewController.handleSingleTap))
-        signleTap.numberOfTapsRequired = 1
-        self.view.addGestureRecognizer(signleTap)
-        
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(OutsideModeViewController.handleDoubleTap))
-        doubleTap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(doubleTap)
         // this will let singleTap not to perform when occurring double tap
-        signleTap.require(toFail: doubleTap)
-        // this will let the two functions beneath respond faster than touchesBegan()
-        signleTap.delaysTouchesBegan = true
-        doubleTap.delaysTouchesBegan = true
+        singleTap.require(toFail: doubleTap)
         
         /*
          ask authentication for speech recognition
@@ -55,18 +45,23 @@ class OutsideModeViewController: UIViewController {
      first touch to activate the recording and then start to say command,
      second touch when finishing speaking
      */
-    @objc func handleSingleTap() {
-        voiceToText.run()
+    @IBAction func handleSingleTap(_ sender: UITapGestureRecognizer) {
+        // diable single tap before command processing completed
+        if canSingleTap {
+            canSingleTap = voiceToText.run()
+        }
     }
     /*
      touch screen two times to call returnTranscript function in SpeechToText class:
      it will store the transcript of voice command in voiceCommand
+     then process the command
      */
-    @objc func handleDoubleTap() {
+    @IBAction func handleDoubleTap(_ sender: UITapGestureRecognizer) {
         voiceCommand = ""
         voiceCommand = voiceToText.returnTranscript()
-//        print("voice command: \(self.voiceCommand)")
         processCommand(command: self.voiceCommand)
+        // enable single tap
+        canSingleTap = true
     }
     /*
      decide what to do based on the receiving voice command
