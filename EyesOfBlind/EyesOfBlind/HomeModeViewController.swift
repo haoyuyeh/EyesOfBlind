@@ -19,31 +19,23 @@ class HomeModeViewController: UIViewController {
     //use to store the command which is converted from voice
     private var voiceCommand = ""
     
-    // MARK: UIViewController
-    
+    // MARK: UITapGestureRecognizer
+    @IBOutlet var singleTap: UITapGestureRecognizer!
+    @IBOutlet var doubleTap: UITapGestureRecognizer!
+    var canSingleTap = true
+
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in home mode")
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-         define two gestures for responding different tasks
-         */
-        let signleTap = UITapGestureRecognizer(target: self, action: #selector(HomeModeViewController.handleSingleTap))
-        signleTap.numberOfTapsRequired = 1
-        self.view.addGestureRecognizer(signleTap)
-        
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(HomeModeViewController.handleDoubleTap))
-        doubleTap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(doubleTap)
         // this will let singleTap not to perform when occurring double tap
-        signleTap.require(toFail: doubleTap)
-        // this will let the two functions beneath respond faster than touchesBegan()
-        signleTap.delaysTouchesBegan = true
-        doubleTap.delaysTouchesBegan = true
+        singleTap.require(toFail: doubleTap)
         
-        // ask authentication for speech recognition
+        /*
+         ask authentication for speech recognition
+         */
         voiceToText.authentication()
         // voice instruction for how to give voice command
         txtToSpeech.say(txtIn: "touch the screen and then start to say command, touch again when finishing speaking")
@@ -53,20 +45,24 @@ class HomeModeViewController: UIViewController {
      first touch to activate the recording and then start to say command,
      second touch when finishing speaking
      */
-    @objc func handleSingleTap() {
-        voiceToText.run()
+    @IBAction func handleSingleTap(_ sender: UITapGestureRecognizer) {
+        // diable single tap before command processing completed
+        if canSingleTap {
+            canSingleTap = voiceToText.run()
+        }
     }
     /*
      touch screen two times to call returnTranscript function in SpeechToText class:
      it will store the transcript of voice command in voiceCommand
+     then process the command
      */
-    @objc func handleDoubleTap() {
+    @IBAction func handleDoubleTap(_ sender: UITapGestureRecognizer) {
         voiceCommand = ""
         voiceCommand = voiceToText.returnTranscript()
-//        print("voice command: \(self.voiceCommand)")
         processCommand(command: self.voiceCommand)
+        // enable single tap
+        canSingleTap = true
     }
-    
     /*
      decide what to do based on the receiving voice command
      */
@@ -85,18 +81,6 @@ class HomeModeViewController: UIViewController {
             print(object)
         }else {
             txtToSpeech.say(txtIn: "no match command, say again")
-        }
-    }
-    /*
-    determine whether the input sentence starts with the input word
-    if yes, return true
-     */
-    private func startWith(sentence:String, word:String) -> Bool {
-        let sentenceSplit = sentence.components(separatedBy: " ")
-        if(sentenceSplit[0] == word) {
-            return true
-        }else {
-            return false
         }
     }
     /*

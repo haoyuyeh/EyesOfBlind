@@ -140,15 +140,18 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
      touch once to activate the recording and then start to say command,
      touch again when finishing speaking
      */
-    func run() {
+    func run() -> Bool{
         if audioEngine.isRunning {
             stopRecording()
+            return false
         } else {
             do {
                 try startRecording()
                 self.txtToSpeech.say(txtIn: "start to say command")
+                return true
             } catch  {
                 print("fail to record\n")
+                return true
             }
         }
     }
