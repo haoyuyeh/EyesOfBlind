@@ -79,10 +79,8 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        // check if the input audio node associated with the device’s microphone
-        guard let inputNode = audioEngine.inputNode else {
-            fatalError("Audio engine has no input node")
-        }
+        
+        let inputNode = audioEngine.inputNode
         
         guard let recognitionRequest = recognitionRequest else {
             fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object")

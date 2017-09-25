@@ -77,7 +77,7 @@ class HomeModeViewController: UIViewController {
             self.tabBarController?.selectedIndex = 0
         }else if(commands == Commands.homeMode){
             txtToSpeech.say(txtIn: "already in home mode")
-        }else if(startWith(sentence: commands, word: Commands.find)) {
+        }else if(commands.starts(with: Commands.find)) {
             /*
              implement finding object code here
              */
@@ -103,9 +103,8 @@ class HomeModeViewController: UIViewController {
      use to retrieve object name from find command
      */
     private func retrieveObject(sentence:String) -> String {
-        // +1 for removing space
-        let index = Commands.find.characters.count + 1
-        let startIndex = sentence.index(sentence.startIndex, offsetBy: index)
-        return sentence.substring(from: startIndex)
+        // remove command and treat others as object
+        let strs = sentence.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
+        return String(strs[1])
     }
 }
