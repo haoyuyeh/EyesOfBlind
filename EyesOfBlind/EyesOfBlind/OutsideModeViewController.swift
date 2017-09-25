@@ -55,14 +55,14 @@ class OutsideModeViewController: UIViewController {
      first touch to activate the recording and then start to say command,
      second touch when finishing speaking
      */
-    func handleSingleTap() {
+    @objc func handleSingleTap() {
         voiceToText.run()
     }
     /*
      touch screen two times to call returnTranscript function in SpeechToText class:
      it will store the transcript of voice command in voiceCommand
      */
-    func handleDoubleTap() {
+    @objc func handleDoubleTap() {
         voiceCommand = ""
         voiceCommand = voiceToText.returnTranscript()
 //        print("voice command: \(self.voiceCommand)")
