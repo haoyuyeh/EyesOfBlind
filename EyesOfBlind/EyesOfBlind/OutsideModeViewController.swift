@@ -37,7 +37,6 @@ class OutsideModeViewController: UIViewController {
     /// unit is second which can be float number
     private let photoTimeInterval = 1.0
     
-    @IBOutlet weak var photo: UIImageView!
     
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in outside mode")
@@ -111,7 +110,6 @@ class OutsideModeViewController: UIViewController {
     @objc func getImage() {
         image = viewExtractor.retrieveImage()
         imageQueue.enqueue(image)
-        photo.image = imageQueue.dequeue()
         print(String(imageQueue.count))
     }
 }

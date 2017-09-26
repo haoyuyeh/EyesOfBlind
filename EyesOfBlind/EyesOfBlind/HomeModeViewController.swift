@@ -37,6 +37,7 @@ class HomeModeViewController: UIViewController {
     /// unit is second which can be float number
     private let photoTimeInterval = 1.0
     
+    
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in home mode")
         viewExtractor.startRunningCaptureSession()
