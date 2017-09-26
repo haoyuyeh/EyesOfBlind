@@ -28,8 +28,10 @@ class OutsideModeViewController: UIViewController {
      test variable for camera frame extractor
      */
     private var viewExtractor = FrameExtractor()
-    /// use to store the image return by FrameExtractor
+    /// use to store the image returned by FrameExtractor
     var image: UIImage!
+    /// all the unprocessed images from camera
+    var imageQueue = Queue<UIImage>()
     /// use to call the getImage function every time interval
     private var imageExtractTimer = Timer()
     /// unit is second which can be float number
@@ -48,6 +50,10 @@ class OutsideModeViewController: UIViewController {
         viewExtractor.stopRunningCaptureSession()
         // invalidate the timer
         imageExtractTimer.invalidate()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        print("Receive Memory Warning")
     }
     
     public override func viewDidLoad() {
@@ -104,6 +110,8 @@ class OutsideModeViewController: UIViewController {
      */
     @objc func getImage() {
         image = viewExtractor.retrieveImage()
-        photo.image = image
+        imageQueue.enqueue(image)
+        photo.image = imageQueue.dequeue()
+        print(String(imageQueue.count))
     }
 }

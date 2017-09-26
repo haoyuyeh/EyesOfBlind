@@ -30,6 +30,8 @@ class HomeModeViewController: UIViewController {
     private var viewExtractor = FrameExtractor()
     /// use to store the image return by FrameExtractor
     var image: UIImage!
+    /// all the unprocessed images from camera
+    var imageQueue = Queue<UIImage>()
     /// use to call the getImage function every time interval
     private var imageExtractTimer = Timer()
     /// unit is second which can be float number
@@ -46,6 +48,10 @@ class HomeModeViewController: UIViewController {
         viewExtractor.stopRunningCaptureSession()
         // invalidate the timer
         imageExtractTimer.invalidate()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        print("Receive Memory Warning")
     }
     
     public override func viewDidLoad() {
@@ -116,5 +122,7 @@ class HomeModeViewController: UIViewController {
      */
     @objc func getImage() {
         image = viewExtractor.retrieveImage()
+        imageQueue.enqueue(image)
+        print(String(imageQueue.count))
     }
 }
