@@ -11,7 +11,7 @@ import Speech
 
 class OutsideModeViewController: UIViewController {
 
-    /*
+    /**
      variables for voice control
      */
     private var txtToSpeech = TextToSpeech()
@@ -24,8 +24,30 @@ class OutsideModeViewController: UIViewController {
     @IBOutlet var doubleTap: UITapGestureRecognizer!
     var canSingleTap = true
     
+    /**
+     test variable for camera frame extractor
+     */
+    private var viewExtractor = FrameExtractor()
+    /// use to store the image return by FrameExtractor
+    var image: UIImage!
+    /// use to call the getImage function every time interval
+    private var imageExtractTimer = Timer()
+    /// unit is second which can be float number
+    private let photoTimeInterval = 1.0
+    
+    @IBOutlet weak var photo: UIImageView!
+    
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in outside mode")
+        viewExtractor.startRunningCaptureSession()
+        // re-activate the timer
+        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        viewExtractor.stopRunningCaptureSession()
+        // invalidate the timer
+        imageExtractTimer.invalidate()
     }
     
     public override func viewDidLoad() {
@@ -33,14 +55,14 @@ class OutsideModeViewController: UIViewController {
         // this will let singleTap not to perform when occurring double tap
         singleTap.require(toFail: doubleTap)
         
-        /*
+        /**
          ask authentication for speech recognition
          */
         voiceToText.authentication()
         // voice instruction for how to give voice command
         txtToSpeech.say(txtIn: "touch the screen and then start to say command, touch again when finishing speaking")
     }
-    /*
+    /**
      touch screen one time to call run function in SpeechToText class:
      first touch to activate the recording and then start to say command,
      second touch when finishing speaking
@@ -51,7 +73,7 @@ class OutsideModeViewController: UIViewController {
             canSingleTap = voiceToText.run()
         }
     }
-    /*
+    /**
      touch screen two times to call returnTranscript function in SpeechToText class:
      it will store the transcript of voice command in voiceCommand
      then process the command
@@ -63,7 +85,7 @@ class OutsideModeViewController: UIViewController {
         // enable single tap
         canSingleTap = true
     }
-    /*
+    /**
      decide what to do based on the receiving voice command
      */
     private func processCommand(command:String) {
@@ -76,5 +98,12 @@ class OutsideModeViewController: UIViewController {
         }else {
             txtToSpeech.say(txtIn: "no match command, say again")
         }
+    }
+    /**
+     get image of front camera from FrameExtractor class
+     */
+    @objc func getImage() {
+        image = viewExtractor.retrieveImage()
+        photo.image = image
     }
 }

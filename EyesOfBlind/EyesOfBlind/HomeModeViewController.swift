@@ -11,7 +11,7 @@ import Speech
 
 class HomeModeViewController: UIViewController {
 
-    /*
+    /**
      variables for voice control
      */
     private var txtToSpeech = TextToSpeech()
@@ -24,8 +24,28 @@ class HomeModeViewController: UIViewController {
     @IBOutlet var doubleTap: UITapGestureRecognizer!
     var canSingleTap = true
 
+    /**
+     test variable for camera frame extractor
+     */
+    private var viewExtractor = FrameExtractor()
+    /// use to store the image return by FrameExtractor
+    var image: UIImage!
+    /// use to call the getImage function every time interval
+    private var imageExtractTimer = Timer()
+    /// unit is second which can be float number
+    private let photoTimeInterval = 1.0
+    
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in home mode")
+        viewExtractor.startRunningCaptureSession()
+        // re-activate the timer
+        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        viewExtractor.stopRunningCaptureSession()
+        // invalidate the timer
+        imageExtractTimer.invalidate()
     }
     
     public override func viewDidLoad() {
@@ -40,7 +60,7 @@ class HomeModeViewController: UIViewController {
         // voice instruction for how to give voice command
         txtToSpeech.say(txtIn: "touch the screen and then start to say command, touch again when finishing speaking")
     }
-    /*
+    /**
      touch screen one time to call run function in SpeechToText class:
      first touch to activate the recording and then start to say command,
      second touch when finishing speaking
@@ -51,7 +71,7 @@ class HomeModeViewController: UIViewController {
             canSingleTap = voiceToText.run()
         }
     }
-    /*
+    /**
      touch screen two times to call returnTranscript function in SpeechToText class:
      it will store the transcript of voice command in voiceCommand
      then process the command
@@ -63,7 +83,7 @@ class HomeModeViewController: UIViewController {
         // enable single tap
         canSingleTap = true
     }
-    /*
+    /**
      decide what to do based on the receiving voice command
      */
     private func processCommand(command:String) {
@@ -83,12 +103,18 @@ class HomeModeViewController: UIViewController {
             txtToSpeech.say(txtIn: "no match command, say again")
         }
     }
-    /*
+    /**
      use to retrieve object name from find command
      */
     private func retrieveObject(sentence:String) -> String {
         // remove command and treat others as object
         let strs = sentence.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
         return String(strs[1])
+    }
+    /**
+     get image of front camera from FrameExtractor class
+     */
+    @objc func getImage() {
+        image = viewExtractor.retrieveImage()
     }
 }
