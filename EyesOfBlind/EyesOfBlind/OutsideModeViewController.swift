@@ -9,7 +9,7 @@
 import UIKit
 import Speech
 
-class OutsideModeViewController: UIViewController {
+class OutsideModeViewController: UIViewController, FrameExtractorDelegate {
 
     /**
      variables for voice control
@@ -25,11 +25,9 @@ class OutsideModeViewController: UIViewController {
     var canSingleTap = true
     
     /**
-     test variable for camera frame extractor
+     variable for camera frame extractor
      */
     private var viewExtractor = FrameExtractor()
-    /// use to store the image returned by FrameExtractor
-    var image: UIImage!
     /// all the unprocessed images from camera
     var imageQueue = Queue<UIImage>()
     /// use to call the getImage function every time interval
@@ -37,6 +35,32 @@ class OutsideModeViewController: UIViewController {
     /// unit is second which can be float number
     private let photoTimeInterval = 1.0
     
+    /**
+     
+     */
+    func returnImage(_ image: UIImage?) {
+        imageQueue.enqueue(image!)
+        print("num of stored images: \(imageQueue.count)")
+    }
+    
+    @IBOutlet weak var previousImage: UIImageView!
+    @IBOutlet weak var currentIamge: UIImageView!
+    
+    @IBAction func takePictures(_ sender: UIButton) {
+        getImage()
+    }
+    
+    @IBAction func processingImages(_ sender: UIButton) {
+        if let processingImage = imageQueue.dequeue() {
+            previousImage.image = processingImage
+            print("after show image1")
+            currentIamge.image = OpenCVWrapper.toGray(processingImage)
+            print("after show image2")
+        }else {
+            print("get image from queue failed")
+        }
+        print("num of stored images: \(imageQueue.count)")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in outside mode")
@@ -57,6 +81,8 @@ class OutsideModeViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        // assign delegate of viewExtractor to this class
+        viewExtractor.delegate = self
         // this will let singleTap not to perform when occurring double tap
         singleTap.require(toFail: doubleTap)
         
@@ -105,11 +131,9 @@ class OutsideModeViewController: UIViewController {
         }
     }
     /**
-     get image of front camera from FrameExtractor class
+     tell FrameExtractor class to capture image
      */
     @objc func getImage() {
-        image = viewExtractor.retrieveImage()
-        imageQueue.enqueue(image)
-        print(String(imageQueue.count))
+        viewExtractor.captureImage()
     }
 }

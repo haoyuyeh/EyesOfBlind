@@ -7,6 +7,12 @@
 //
 import UIKit
 import AVFoundation
+/**
+ use this protocol to pass data to other class
+ */
+protocol FrameExtractorDelegate: class {
+    func returnImage(_ image: UIImage?)
+}
 
 class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
     /**
@@ -18,7 +24,7 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
     
     var photoOutput: AVCapturePhotoOutput?
     var image = UIImage()
-//    var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
+    weak var delegate: FrameExtractorDelegate?
     
     override init() {
         super.init()
@@ -68,19 +74,10 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
     }
     /**
      */
-    func retrieveImage() -> UIImage {
+    func captureImage() {
         let settings = AVCapturePhotoSettings()
         photoOutput?.capturePhoto(with: settings, delegate: self)
-        return image
     }
-//    func setupPreviewLayer() {
-//        cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-//        cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-//        cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-//        cameraPreviewLayer?.frame = self.view.frame
-//        self.view.layer.insertSublayer(cameraPreviewLayer!, at: 0)
-//    }
-    
     /**
      */
     func startRunningCaptureSession() {
@@ -96,6 +93,7 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let imageData = photo.fileDataRepresentation() {
             image = UIImage(data: imageData)!
+            delegate?.returnImage(image)
         }
     }
 }

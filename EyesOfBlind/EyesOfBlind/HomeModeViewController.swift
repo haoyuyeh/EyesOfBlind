@@ -9,7 +9,7 @@
 import UIKit
 import Speech
 
-class HomeModeViewController: UIViewController {
+class HomeModeViewController: UIViewController, FrameExtractorDelegate {
 
     /**
      variables for voice control
@@ -25,11 +25,9 @@ class HomeModeViewController: UIViewController {
     var canSingleTap = true
 
     /**
-     test variable for camera frame extractor
+     variable for camera frame extractor
      */
     private var viewExtractor = FrameExtractor()
-    /// use to store the image return by FrameExtractor
-    var image: UIImage!
     /// all the unprocessed images from camera
     var imageQueue = Queue<UIImage>()
     /// use to call the getImage function every time interval
@@ -37,6 +35,13 @@ class HomeModeViewController: UIViewController {
     /// unit is second which can be float number
     private let photoTimeInterval = 1.0
     
+    /**
+     
+     */
+    func returnImage(_ image: UIImage?) {
+        imageQueue.enqueue(image!)
+        print("num of stored images: \(imageQueue.count)")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in home mode")
@@ -57,6 +62,8 @@ class HomeModeViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        // assign delegate of viewExtractor to this class
+        viewExtractor.delegate = self
         // this will let singleTap not to perform when occurring double tap
         singleTap.require(toFail: doubleTap)
         
@@ -122,8 +129,6 @@ class HomeModeViewController: UIViewController {
      get image of front camera from FrameExtractor class
      */
     @objc func getImage() {
-        image = viewExtractor.retrieveImage()
-        imageQueue.enqueue(image)
-        print(String(imageQueue.count))
+        viewExtractor.captureImage()
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B0D3E1C1F7F7440005CEFEF /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B0D3E1B1F7F7440005CEFEF /* OpenCVWrapper.mm */; };
+		9B0D3E1F1F7F8E71005CEFEF /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D3E181F7F7429005CEFEF /* opencv2.framework */; };
 		9B8660181F6FB05800F6C02D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8660171F6FB05800F6C02D /* AppDelegate.swift */; };
 		9B86601A1F6FB05800F6C02D /* OutsideModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8660191F6FB05800F6C02D /* OutsideModeViewController.swift */; };
 		9B86601C1F6FB05800F6C02D /* HomeModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B86601B1F6FB05800F6C02D /* HomeModeViewController.swift */; };
@@ -50,6 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B0D3E181F7F7429005CEFEF /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		9B0D3E191F7F7440005CEFEF /* EyesOfBlind-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EyesOfBlind-Bridging-Header.h"; sourceTree = "<group>"; };
+		9B0D3E1A1F7F7440005CEFEF /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
+		9B0D3E1B1F7F7440005CEFEF /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		9B8660141F6FB05800F6C02D /* EyesOfBlind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyesOfBlind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8660171F6FB05800F6C02D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B8660191F6FB05800F6C02D /* OutsideModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsideModeViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0D3E1F1F7F8E71005CEFEF /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,13 +103,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B0D3E1D1F7F8B3B005CEFEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9B86600B1F6FB05700F6C02D = {
 			isa = PBXGroup;
 			children = (
+				9B0D3E1A1F7F7440005CEFEF /* OpenCVWrapper.h */,
+				9B0D3E1B1F7F7440005CEFEF /* OpenCVWrapper.mm */,
 				9B8660161F6FB05800F6C02D /* EyesOfBlind */,
 				9B86602D1F6FB05800F6C02D /* EyesOfBlindTests */,
 				9B8660381F6FB05800F6C02D /* EyesOfBlindUITests */,
 				9B8660151F6FB05800F6C02D /* Products */,
+				9B0D3E191F7F7440005CEFEF /* EyesOfBlind-Bridging-Header.h */,
+				9B0D3E1D1F7F8B3B005CEFEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +137,7 @@
 		9B8660161F6FB05800F6C02D /* EyesOfBlind */ = {
 			isa = PBXGroup;
 			children = (
+				9B0D3E181F7F7429005CEFEF /* opencv2.framework */,
 				9B86604A1F6FB0F300F6C02D /* Supporting Files */,
 				9B8660491F6FB0E700F6C02D /* Models */,
 				9B8660481F6FB0D200F6C02D /* Controllers */,
@@ -330,6 +349,7 @@
 				9B8660501F6FB53400F6C02D /* TextToSpeech.swift in Sources */,
 				9BC39A241F7A264400EEA504 /* Queue.swift in Sources */,
 				9BC39A201F792CBE00EEA504 /* FrameExtractor.swift in Sources */,
+				9B0D3E1C1F7F7440005CEFEF /* OpenCVWrapper.mm in Sources */,
 				9B86604C1F6FB4E100F6C02D /* SpeechToText.swift in Sources */,
 				9B8660181F6FB05800F6C02D /* AppDelegate.swift in Sources */,
 				9B86601A1F6FB05800F6C02D /* OutsideModeViewController.swift in Sources */,
@@ -508,11 +528,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 73PJ5HL78M;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/EyesOfBlind";
 				INFOPLIST_FILE = EyesOfBlind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.edu.au.782692.EyesOfBlind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EyesOfBlind-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -522,11 +546,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 73PJ5HL78M;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/EyesOfBlind";
 				INFOPLIST_FILE = EyesOfBlind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.edu.au.782692.EyesOfBlind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EyesOfBlind-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
