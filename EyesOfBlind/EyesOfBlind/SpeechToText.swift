@@ -12,6 +12,10 @@
 import UIKit
 import Speech
 
+protocol SpeechToTextDelegate: class {
+    func returnTranscript(_ transcript: String)
+}
+
 public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
     
     /*
@@ -37,6 +41,8 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
      from the microphone.
      */
     private let audioEngine = AVAudioEngine()
+    
+    weak var delegate: SpeechToTextDelegate?
     
     var txtToSpeech = TextToSpeech()
     
@@ -109,7 +115,8 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
                 self.recognitionTask = nil
                 // when ending the transcription, feedback with a voice instruction
                 if isFinal {
-                    self.txtToSpeech.say(txtIn: "double touch the screen now")
+//                    self.txtToSpeech.say(txtIn: "double touch the screen now")
+                    self.delegate?.returnTranscript(self.finalTranscript)
                 }
             }
         }
@@ -133,9 +140,9 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
     /*
      return the transcript
      */
-    func returnTranscript() -> String{
-        return self.finalTranscript
-    }
+//    func returnTranscript() -> String{
+//        return self.finalTranscript
+//    }
     /*
      touch once to activate the recording and then start to say command,
      touch again when finishing speaking

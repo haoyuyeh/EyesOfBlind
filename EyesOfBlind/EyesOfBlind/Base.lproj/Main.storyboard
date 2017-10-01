@@ -80,13 +80,11 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="5yx-C8-2cw" appends="YES" id="cAC-Wh-0v4"/>
-                            <outletCollection property="gestureRecognizers" destination="WwS-t3-DKy" appends="YES" id="1kg-pk-6Yk"/>
                         </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Outside Mode" image="compass" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="currentIamge" destination="vsO-iN-wbr" id="OAT-kl-aaH"/>
-                        <outlet property="doubleTap" destination="WwS-t3-DKy" id="ZZo-tY-6hU"/>
                         <outlet property="previousImage" destination="WDC-ys-8tn" id="FcI-Jq-4Vt"/>
                         <outlet property="singleTap" destination="5yx-C8-2cw" id="Ik2-PO-VmN"/>
                     </connections>
@@ -95,11 +93,6 @@
                 <tapGestureRecognizer delaysTouchesBegan="YES" id="5yx-C8-2cw">
                     <connections>
                         <action selector="handleSingleTap:" destination="9pv-A4-QxB" id="xJA-pg-AlZ"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="WwS-t3-DKy">
-                    <connections>
-                        <action selector="handleDoubleTap:" destination="9pv-A4-QxB" id="a4W-lR-Lbm"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -131,12 +124,10 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="R33-PI-orW" appends="YES" id="haj-qS-M35"/>
-                            <outletCollection property="gestureRecognizers" destination="yob-gp-NhF" appends="YES" id="amA-HO-fmd"/>
                         </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home Mode" image="home" id="cPa-gy-q4n"/>
                     <connections>
-                        <outlet property="doubleTap" destination="yob-gp-NhF" id="EJ5-pM-WJB"/>
                         <outlet property="singleTap" destination="R33-PI-orW" id="xk2-Sw-l0N"/>
                     </connections>
                 </viewController>
@@ -144,11 +135,6 @@
                 <tapGestureRecognizer delaysTouchesBegan="YES" id="R33-PI-orW">
                     <connections>
                         <action selector="handleSingleTap:" destination="8rJ-Kc-sve" id="1Ll-ex-5ti"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="yob-gp-NhF">
-                    <connections>
-                        <action selector="handleDoubleTap:" destination="8rJ-Kc-sve" id="2kC-na-oOf"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

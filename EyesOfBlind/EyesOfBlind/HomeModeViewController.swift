@@ -9,24 +9,27 @@
 import UIKit
 import Speech
 
-class HomeModeViewController: UIViewController, FrameExtractorDelegate {
+class HomeModeViewController: UIViewController, FrameExtractorDelegate, SpeechToTextDelegate {
 
-    /**
+    /****************************
      variables for voice control
-     */
+     ***************************/
+    
     private var txtToSpeech = TextToSpeech()
     private var voiceToText = SpeechToText()
     //use to store the command which is converted from voice
     private var voiceCommand = ""
     
-    // MARK: UITapGestureRecognizer
+    /*****************************
+     variables for viewController
+     ****************************/
     @IBOutlet var singleTap: UITapGestureRecognizer!
-    @IBOutlet var doubleTap: UITapGestureRecognizer!
     var canSingleTap = true
 
-    /**
+    /************************************
      variable for camera frame extractor
-     */
+     ***********************************/
+    
     private var viewExtractor = FrameExtractor()
     /// all the unprocessed images from camera
     var imageQueue = Queue<UIImage>()
@@ -35,23 +38,22 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate {
     /// unit is second which can be float number
     private let photoTimeInterval = 1.0
     
-    /**
-     
-     */
-    func returnImage(_ image: UIImage?) {
-        imageQueue.enqueue(image!)
-        print("num of stored images: \(imageQueue.count)")
-    }
+    /*************************
+     viewController functions
+     ************************/
     
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in home mode")
+        
         viewExtractor.startRunningCaptureSession()
+        
         // re-activate the timer
         imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         viewExtractor.stopRunningCaptureSession()
+        
         // invalidate the timer
         imageExtractTimer.invalidate()
     }
@@ -62,15 +64,15 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        // assign delegate of viewExtractor to this class
+        // assign delegate of viewExtractor and voiceToText to this class
         viewExtractor.delegate = self
-        // this will let singleTap not to perform when occurring double tap
-        singleTap.require(toFail: doubleTap)
+        voiceToText.delegate = self
         
         /*
          ask authentication for speech recognition
          */
         voiceToText.authentication()
+        
         // voice instruction for how to give voice command
         txtToSpeech.say(txtIn: "touch the screen and then start to say command, touch again when finishing speaking")
     }
@@ -85,18 +87,23 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate {
             canSingleTap = voiceToText.run()
         }
     }
+    
+    /***********************
+     SpeechToText functions
+     ***********************/
+    
     /**
-     touch screen two times to call returnTranscript function in SpeechToText class:
-     it will store the transcript of voice command in voiceCommand
-     then process the command
+     delegate function: get transcript from SpeechToText and process it
      */
-    @IBAction func handleDoubleTap(_ sender: UITapGestureRecognizer) {
+    func returnTranscript(_ transcript: String) {
         voiceCommand = ""
-        voiceCommand = voiceToText.returnTranscript()
+        voiceCommand = transcript
+        print(voiceCommand)
         processCommand(command: self.voiceCommand)
         // enable single tap
         canSingleTap = true
     }
+    
     /**
      decide what to do based on the receiving voice command
      */
@@ -117,6 +124,19 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate {
             txtToSpeech.say(txtIn: "no match command, say again")
         }
     }
+    
+    /*************************
+     FrameExtractor functions
+     ************************/
+    
+    /**
+     delegate function: get captured image from FrameExtractor
+     */
+    func returnImage(_ image: UIImage?) {
+        imageQueue.enqueue(image!)
+        print("num of stored images: \(imageQueue.count)")
+    }
+    
     /**
      use to retrieve object name from find command
      */
@@ -125,10 +145,15 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate {
         let strs = sentence.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
         return String(strs[1])
     }
+    
     /**
-     get image of front camera from FrameExtractor class
+     tell FrameExtractor class to capture image
      */
     @objc func getImage() {
         viewExtractor.captureImage()
     }
+    
+    /***********************
+     OpenCV functions
+     ***********************/
 }
