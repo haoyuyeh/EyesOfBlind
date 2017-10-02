@@ -16,8 +16,13 @@ import Foundation
 class Commands {
     /// change to outside mode
     static let outsideMode = "outside mode"
+    // start the guiding tiles function
+    static let start = "start"
+    // stop the guiding tiles function
+    static let stop = "stop"
     /// change to home mode
     static let homeMode = "home mode"
     /// find object under home mode
     static let find = "find"
+    
 }

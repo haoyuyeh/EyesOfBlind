@@ -21,61 +21,14 @@
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2CG-5t-OGl">
-                                <rect key="frame" x="158" y="550" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="EEo-bt-m41"/>
-                                    <constraint firstAttribute="width" constant="60" id="SGS-xK-h4q"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="takePictures:" destination="9pv-A4-QxB" eventType="touchUpInside" id="cvc-co-HJK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NhO-Lc-Ch2">
-                                <rect key="frame" x="53" y="550" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Tjp-Eq-uRq"/>
-                                    <constraint firstAttribute="height" constant="60" id="gRw-Re-UgI"/>
-                                </constraints>
-                                <state key="normal" title="process">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="processingImages:" destination="9pv-A4-QxB" eventType="touchUpInside" id="837-JY-4zv"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compass" translatesAutoresizingMaskIntoConstraints="NO" id="WDC-ys-8tn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="542"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="2CG-5t-OGl" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="0Kz-5X-aKx"/>
-                            <constraint firstItem="NhO-Lc-Ch2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tsR-hK-woN" secondAttribute="leading" constant="20" symbolic="YES" id="50S-E5-U5J"/>
-                            <constraint firstItem="2CG-5t-OGl" firstAttribute="leading" secondItem="NhO-Lc-Ch2" secondAttribute="trailing" constant="45" id="SGR-Xa-fta"/>
-                            <constraint firstItem="WDC-ys-8tn" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="UCw-Bu-GuT"/>
-                            <constraint firstItem="WDC-ys-8tn" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="YBK-VX-yKY"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="2CG-5t-OGl" secondAttribute="bottom" constant="8" symbolic="YES" id="duy-F0-fvP"/>
-                            <constraint firstItem="WDC-ys-8tn" firstAttribute="centerX" secondItem="2CG-5t-OGl" secondAttribute="centerX" id="euC-2a-7ck"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="NhO-Lc-Ch2" secondAttribute="bottom" constant="8" symbolic="YES" id="ytW-SV-hdC"/>
-                            <constraint firstItem="NhO-Lc-Ch2" firstAttribute="top" secondItem="WDC-ys-8tn" secondAttribute="bottom" constant="8" symbolic="YES" id="zjG-6V-Umm"/>
-                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="5yx-C8-2cw" appends="YES" id="cAC-Wh-0v4"/>
                         </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Outside Mode" image="compass" id="acW-dT-cKf"/>
                     <connections>
-                        <outlet property="previousImage" destination="WDC-ys-8tn" id="FcI-Jq-4Vt"/>
                         <outlet property="singleTap" destination="5yx-C8-2cw" id="Ik2-PO-VmN"/>
                     </connections>
                 </viewController>

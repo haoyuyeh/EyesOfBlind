@@ -27,9 +27,9 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     @IBOutlet var singleTap: UITapGestureRecognizer!
     var canSingleTap = true
     
-    /************************************
-     variable for camera frame extractor
-     ***********************************/
+    /*************************************
+     variables for camera frame extractor
+     ************************************/
     
     private var viewExtractor = FrameExtractor()
     /// all the unprocessed images from camera
@@ -37,35 +37,13 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     /// use to call the getImage function every time interval
     private var imageExtractTimer = Timer()
     /// unit is second which can be float number
-    private let photoTimeInterval = 0.6
+    private let photoTimeInterval = 1.0
     
     /************************************
-     testing code will be removed later
+     variables for guiding tile function
      ***********************************/
     
-    @IBOutlet weak var previousImage: UIImageView!
-    
-    @IBAction func takePictures(_ sender: UIButton) {
-        getImage()
-    }
-    
-    @IBAction func processingImages(_ sender: UIButton) {
-        if let image1 = imageQueue.dequeue() {
-            if let image2 = imageQueue.dequeue() {
-                let start = CACurrentMediaTime()
-                previousImage.image = OpenCVWrapper.imageSimilarity(image1, andImage2: image2)
-                let end = CACurrentMediaTime()
-                print("run time = \(end - start)")
-            }else {
-                // get second failed, therefore, put image1 back to the queue
-                imageQueue.enqueue(image1)
-                print("get image2 from queue failed")
-            }
-        }else {
-            print("get image1 from queue failed")
-        }
-        print("num of stored images: \(imageQueue.count)")
-    }
+    var image1:UIImage? = nil
     
     /*************************
      viewController functions
@@ -77,7 +55,7 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         viewExtractor.startRunningCaptureSession()
         
         // re-activate the timer
-//        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
+        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -142,20 +120,57 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
             self.tabBarController?.selectedIndex = 1
         }else if(commands == Commands.outsideMode){
             txtToSpeech.say(txtIn: "already in outside mode")
+        }else if (commands == Commands.start) {
+            /// start the guiding tiles functionality
+            // re-activate the timer
+            imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
+        }else if (commands == Commands.stop) {
+            /// stop the guiding tiles functionality
+            // invalidate the timer
+            imageExtractTimer.invalidate()
         }else {
             txtToSpeech.say(txtIn: "no match command, say again")
         }
     }
     
-    /*************************
-     FrameExtractor functions
-     ************************/
+    /*******************************************
+     FrameExtractor and Guiding Tiles functions
+     ******************************************/
     
     /**
      delegate function: get captured image from FrameExtractor
      */
     func returnImage(_ image: UIImage?) {
         imageQueue.enqueue(image!)
+        if let image2 = imageQueue.dequeue() {
+            if image1 == nil {
+                image1 = image2
+            }
+//            let start = CACurrentMediaTime()
+            let shift = OpenCVWrapper.positionShifting(image1!, andImage2: image2)
+            /// guiding tiles function
+            let threshold = 50.0
+            
+            // > 0  means toward left; <0 means toward right
+            if shift >= 0 {
+                if abs(shift) >= threshold {
+                    txtToSpeech.say(txtIn: "toward right to keep straight")
+                }else {
+                    // no need to change direction, therefore, change the base of comparision
+                    image1 = image2
+                }
+            }else {
+                if abs(shift) >= threshold {
+                    txtToSpeech.say(txtIn: "toward left to keep straight")
+                }else {
+                    image1 = image2
+                }
+            }
+//            let end = CACurrentMediaTime()
+//            print("run time = \(end - start)")
+        }else {
+            print("get image2 from queue failed")
+        }
         print("num of stored images: \(imageQueue.count)")
     }
     
@@ -166,7 +181,4 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         viewExtractor.captureImage()
     }
     
-    /***********************
-     OpenCV functions
-     ***********************/
 }
