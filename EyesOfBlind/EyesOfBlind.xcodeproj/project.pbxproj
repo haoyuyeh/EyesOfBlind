@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9B0D3E1C1F7F7440005CEFEF /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B0D3E1B1F7F7440005CEFEF /* OpenCVWrapper.mm */; };
-		9B0D3E1F1F7F8E71005CEFEF /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0D3E181F7F7429005CEFEF /* opencv2.framework */; };
+		9B4224E51F81C84100C4C943 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4224E41F81C71300C4C943 /* opencv2.framework */; };
 		9B8660181F6FB05800F6C02D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8660171F6FB05800F6C02D /* AppDelegate.swift */; };
 		9B86601A1F6FB05800F6C02D /* OutsideModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8660191F6FB05800F6C02D /* OutsideModeViewController.swift */; };
 		9B86601C1F6FB05800F6C02D /* HomeModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B86601B1F6FB05800F6C02D /* HomeModeViewController.swift */; };
@@ -52,10 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9B0D3E181F7F7429005CEFEF /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		9B0D3E191F7F7440005CEFEF /* EyesOfBlind-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EyesOfBlind-Bridging-Header.h"; sourceTree = "<group>"; };
 		9B0D3E1A1F7F7440005CEFEF /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		9B0D3E1B1F7F7440005CEFEF /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		9B4224E41F81C71300C4C943 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		9B8660141F6FB05800F6C02D /* EyesOfBlind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyesOfBlind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8660171F6FB05800F6C02D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B8660191F6FB05800F6C02D /* OutsideModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsideModeViewController.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B0D3E1F1F7F8E71005CEFEF /* opencv2.framework in Frameworks */,
+				9B4224E51F81C84100C4C943 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +137,7 @@
 		9B8660161F6FB05800F6C02D /* EyesOfBlind */ = {
 			isa = PBXGroup;
 			children = (
-				9B0D3E181F7F7429005CEFEF /* opencv2.framework */,
+				9B4224E41F81C71300C4C943 /* opencv2.framework */,
 				9B86604A1F6FB0F300F6C02D /* Supporting Files */,
 				9B8660491F6FB0E700F6C02D /* Models */,
 				9B8660481F6FB0D200F6C02D /* Controllers */,

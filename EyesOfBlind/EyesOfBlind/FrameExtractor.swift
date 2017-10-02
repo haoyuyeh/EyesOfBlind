@@ -7,6 +7,7 @@
 //
 import UIKit
 import AVFoundation
+
 /**
  use this protocol to pass data to other class
  */
@@ -89,6 +90,9 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
         captureSession.stopRunning()
     }
     
+    /**
+     get image data here 
+     */
     @available(iOS 11.0, *)
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let imageData = photo.fileDataRepresentation() {

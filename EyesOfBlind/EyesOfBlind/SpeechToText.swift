@@ -5,38 +5,41 @@
 //  Created by Hao Yu Yeh on 2017/9/18.
 //  Copyright © 2017年 Hao Yu Yeh. All rights reserved.
 //
-/*
+/**
  This class "SpeechToText" is used to record voice and translate it to text form
  */
 
 import UIKit
 import Speech
 
+/**
+ use this protocol to pass data to other class
+ */
 protocol SpeechToTextDelegate: class {
     func returnTranscript(_ transcript: String)
 }
 
 public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
     
-    /*
+    /**
      SFSpeechRecognizer is the primary controller in the framework. Its most
      important job is to generate recognition tasks and return results. It also
      handles authorization and configures locales.
      */
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
-    /*
+    /**
      SFSpeechRecognitionRequest is the base class for recognition requests.
      Its job is to point the SFSpeechRecognizer to an audio source from which
      transcription should occur. There are two concrete types: SFSpeechURLRecognitionRequest, for reading from a file, and SFSpeechAudioBufferRecognitionRequest for reading from a buffer.
      */
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    /*
+    /**
      SFSpeechRecognitionTask objects are created when a request is kicked off
      by the recognizer. They are used to track progress of a transcription or
      cancel it.
      */
     private var recognitionTask: SFSpeechRecognitionTask?
-    /*
+    /**
      audioEngine is an AVAudioEngine object using to process input audio signals
      from the microphone.
      */
@@ -47,7 +50,8 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
     var txtToSpeech = TextToSpeech()
     
     private var finalTranscript = ""
-    /*
+    
+    /**
      confirm access to Speech recognition
      */
     func authentication(){
@@ -68,7 +72,8 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
             }
         }
     }
-    /*
+    
+    /**
      it's used to perform speech recognition and if completing the transcript,
      it will feedback with a voice instruction
      */
@@ -115,7 +120,6 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
                 self.recognitionTask = nil
                 // when ending the transcription, feedback with a voice instruction
                 if isFinal {
-//                    self.txtToSpeech.say(txtIn: "double touch the screen now")
                     self.delegate?.returnTranscript(self.finalTranscript)
                 }
             }
@@ -130,20 +134,16 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
         
         try audioEngine.start()
     }
-    /*
+    
+    /**
      stop the audioEngine and stop inputing audio
      */
     private func stopRecording(){
         audioEngine.stop()
         recognitionRequest?.endAudio()
     }
-    /*
-     return the transcript
-     */
-//    func returnTranscript() -> String{
-//        return self.finalTranscript
-//    }
-    /*
+
+    /**
      touch once to activate the recording and then start to say command,
      touch again when finishing speaking
      */

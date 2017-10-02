@@ -5,7 +5,7 @@
 //  Created by Hao Yu Yeh on 2017/9/18.
 //  Copyright © 2017年 Hao Yu Yeh. All rights reserved.
 //
-/*
+/**
  This class "TextToSpeech" is used to transform a text into voice
  */
 import Foundation

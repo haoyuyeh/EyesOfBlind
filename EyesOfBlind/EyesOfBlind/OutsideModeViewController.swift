@@ -37,25 +37,32 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     /// use to call the getImage function every time interval
     private var imageExtractTimer = Timer()
     /// unit is second which can be float number
-    private let photoTimeInterval = 1.0
+    private let photoTimeInterval = 0.6
     
-    
+    /************************************
+     testing code will be removed later
+     ***********************************/
     
     @IBOutlet weak var previousImage: UIImageView!
-    @IBOutlet weak var currentIamge: UIImageView!
     
     @IBAction func takePictures(_ sender: UIButton) {
         getImage()
     }
     
     @IBAction func processingImages(_ sender: UIButton) {
-        if let processingImage = imageQueue.dequeue() {
-            previousImage.image = processingImage
-            print("after show image1")
-            currentIamge.image = OpenCVWrapper.toGray(processingImage)
-            print("after show image2")
+        if let image1 = imageQueue.dequeue() {
+            if let image2 = imageQueue.dequeue() {
+                let start = CACurrentMediaTime()
+                previousImage.image = OpenCVWrapper.imageSimilarity(image1, andImage2: image2)
+                let end = CACurrentMediaTime()
+                print("run time = \(end - start)")
+            }else {
+                // get second failed, therefore, put image1 back to the queue
+                imageQueue.enqueue(image1)
+                print("get image2 from queue failed")
+            }
         }else {
-            print("get image from queue failed")
+            print("get image1 from queue failed")
         }
         print("num of stored images: \(imageQueue.count)")
     }
@@ -70,7 +77,7 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         viewExtractor.startRunningCaptureSession()
         
         // re-activate the timer
-        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
+//        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
