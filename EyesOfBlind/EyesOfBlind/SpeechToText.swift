@@ -78,6 +78,7 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
      it will feedback with a voice instruction
      */
     private func startRecording() throws {
+        finalTranscript = ""
         // Cancel the previous task if it's running.
         if let recognitionTask = recognitionTask {
             recognitionTask.cancel()
@@ -118,10 +119,12 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
                 inputNode.removeTap(onBus: 0)
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
+                self.delegate?.returnTranscript(self.finalTranscript)
+
                 // when ending the transcription, feedback with a voice instruction
-                if isFinal {
-                    self.delegate?.returnTranscript(self.finalTranscript)
-                }
+//                if isFinal {
+//                    self.delegate?.returnTranscript(self.finalTranscript)
+//                }
             }
         }
         // adding audio input to recognitionRequest

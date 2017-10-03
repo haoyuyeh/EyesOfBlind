@@ -48,14 +48,14 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate, SpeechTo
         viewExtractor.startRunningCaptureSession()
         
         // re-activate the timer
-        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
+//        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         viewExtractor.stopRunningCaptureSession()
         
         // invalidate the timer
-        imageExtractTimer.invalidate()
+//        imageExtractTimer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,7 +64,7 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate, SpeechTo
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        // assign delegate of viewExtractor and voiceToText to this class
+        // assign delegate to this class
         viewExtractor.delegate = self
         voiceToText.delegate = self
         

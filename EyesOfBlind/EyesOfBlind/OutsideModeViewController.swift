@@ -9,7 +9,7 @@
 import UIKit
 import Speech
 
-class OutsideModeViewController: UIViewController, FrameExtractorDelegate, SpeechToTextDelegate {
+class OutsideModeViewController: UIViewController, FrameExtractorDelegate, SpeechToTextDelegate, UITextFieldDelegate {
 
     /****************************
      variables for voice control
@@ -37,13 +37,39 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     /// use to call the getImage function every time interval
     private var imageExtractTimer = Timer()
     /// unit is second which can be float number
-    private let photoTimeInterval = 1.0
+    private var photoTimeInterval = 1.0
     
     /************************************
      variables for guiding tile function
      ***********************************/
     
     var image1:UIImage? = nil
+    
+    /*****************************************
+     change parameters to improve performance
+     ****************************************/
+    @IBOutlet weak var txtIn: UITextField!
+    @IBOutlet weak var timeIn: UITextField!    
+    var threshold = 50.0
+    
+    @IBAction func getTime(_ sender: UIButton) {
+        if let time = timeIn.text {
+            photoTimeInterval = Double(time)!
+        }
+        timeIn.text = ""
+    }
+    
+    @IBAction func getVal(_ sender: UIButton) {
+        if let val = txtIn.text {
+            threshold = Double(val)!
+        }
+        txtIn.text = ""
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     /*************************
      viewController functions
@@ -55,7 +81,7 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         viewExtractor.startRunningCaptureSession()
         
         // re-activate the timer
-        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
+//        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,7 +100,8 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         // assign delegate of viewExtractor and voiceToText to this class
         viewExtractor.delegate = self
         voiceToText.delegate = self
-        
+        txtIn.delegate = self
+        timeIn.delegate = self
         /**
          ask authentication for speech recognition
          */
@@ -148,13 +175,15 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
             }
 //            let start = CACurrentMediaTime()
             let shift = OpenCVWrapper.positionShifting(image1!, andImage2: image2)
-            /// guiding tiles function
-            let threshold = 50.0
             
+            /// guiding tiles function
+//            let threshold = 50.0
+            print("guiding tiles: threshold = \(threshold)")
             // > 0  means toward left; <0 means toward right
             if shift >= 0 {
                 if abs(shift) >= threshold {
                     txtToSpeech.say(txtIn: "toward right to keep straight")
+                    
                 }else {
                     // no need to change direction, therefore, change the base of comparision
                     image1 = image2
@@ -174,6 +203,12 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         print("num of stored images: \(imageQueue.count)")
     }
     
+    @IBAction func startSpeak(_ sender: UIButton) {
+        TextToSpeech.synth.continueSpeaking()
+    }
+    @IBAction func stopSpeak(_ sender: UIButton) {
+        TextToSpeech.synth.stopSpeaking(at: AVSpeechBoundary.immediate)
+    }
     /**
      tell FrameExtractor class to capture image
      */

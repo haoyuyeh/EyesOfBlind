@@ -24,6 +24,5 @@ class TextToSpeech {
                 break
             }
         }
-        
     }
 }
