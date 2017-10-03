@@ -25,7 +25,7 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
      ****************************/
     
     @IBOutlet var singleTap: UITapGestureRecognizer!
-    var canSingleTap = true
+    private var canSingleTap = true
     
     /*************************************
      variables for camera frame extractor
@@ -33,24 +33,26 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     
     private var viewExtractor = FrameExtractor()
     /// all the unprocessed images from camera
-    var imageQueue = Queue<UIImage>()
+    private var imageQueue = Queue<UIImage>()
     /// use to call the getImage function every time interval
     private var imageExtractTimer = Timer()
     /// unit is second which can be float number
-    private var photoTimeInterval = 1.0
+    private var photoTimeInterval = 0.7
     
     /************************************
      variables for guiding tile function
      ***********************************/
     
-    var image1:UIImage? = nil
+    private var image1:UIImage? = nil
+    private var alertTimer = Timer()
+    private var alertSwitch = true
     
     /*****************************************
      change parameters to improve performance
      ****************************************/
     @IBOutlet weak var txtIn: UITextField!
     @IBOutlet weak var timeIn: UITextField!    
-    var threshold = 50.0
+    private var threshold = 35.0
     
     @IBAction func getTime(_ sender: UIButton) {
         if let time = timeIn.text {
@@ -177,20 +179,37 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
             let shift = OpenCVWrapper.positionShifting(image1!, andImage2: image2)
             
             /// guiding tiles function
-//            let threshold = 50.0
-            print("guiding tiles: threshold = \(threshold)")
+            let blockTime = 2.0
+
             // > 0  means toward left; <0 means toward right
             if shift >= 0 {
                 if abs(shift) >= threshold {
-                    txtToSpeech.say(txtIn: "toward right to keep straight")
-                    
+                    /*
+                     once the alert emmitted, block emmitting for a time period
+                     because a bunch images related to the same alert event
+                     */
+                    if alertSwitch {
+                        txtToSpeech.say(txtIn: "toward right to keep straight")
+                        alertSwitch = false
+                        alertTimer = Timer.scheduledTimer(withTimeInterval: blockTime, repeats: false, block: { (alertTimer) in
+                            self.turnOnAlert()
+                        })
+                        print(alertSwitch)
+                    }
                 }else {
                     // no need to change direction, therefore, change the base of comparision
                     image1 = image2
                 }
             }else {
                 if abs(shift) >= threshold {
-                    txtToSpeech.say(txtIn: "toward left to keep straight")
+                    if alertSwitch {
+                        txtToSpeech.say(txtIn: "toward left to keep straight")
+                        alertSwitch = false
+                        alertTimer = Timer.scheduledTimer(withTimeInterval: blockTime, repeats: false, block: { (alertTimer) in
+                            self.turnOnAlert()
+                        })
+                        print(alertSwitch)
+                    }
                 }else {
                     image1 = image2
                 }
@@ -203,11 +222,8 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         print("num of stored images: \(imageQueue.count)")
     }
     
-    @IBAction func startSpeak(_ sender: UIButton) {
-        TextToSpeech.synth.continueSpeaking()
-    }
-    @IBAction func stopSpeak(_ sender: UIButton) {
-        TextToSpeech.synth.stopSpeaking(at: AVSpeechBoundary.immediate)
+    @objc private func turnOnAlert() {
+        alertSwitch = true
     }
     /**
      tell FrameExtractor class to capture image
