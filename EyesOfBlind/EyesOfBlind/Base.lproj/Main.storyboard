@@ -83,10 +83,10 @@
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
-        <!--Home Mode-->
+        <!--Navigation Mode-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="HomeModeViewController" customModule="EyesOfBlind" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="NavigationModeViewController" customModule="EyesOfBlind" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -111,7 +111,7 @@
                             <outletCollection property="gestureRecognizers" destination="R33-PI-orW" appends="YES" id="haj-qS-M35"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home Mode" image="home" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Navigation Mode" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="singleTap" destination="R33-PI-orW" id="xk2-Sw-l0N"/>
                     </connections>
@@ -147,6 +147,5 @@
     </scenes>
     <resources>
         <image name="compass" width="30" height="30"/>
-        <image name="home" width="30" height="30"/>
     </resources>
 </document>

@@ -9,7 +9,7 @@
 import UIKit
 import Speech
 
-class HomeModeViewController: UIViewController, SpeechToTextDelegate {
+class NavigationModeViewController: UIViewController, SpeechToTextDelegate {
 
     /****************************
      variables for voice control
@@ -31,7 +31,7 @@ class HomeModeViewController: UIViewController, SpeechToTextDelegate {
      ************************/
     
     override func viewWillAppear(_ animated: Bool) {
-        txtToSpeech.say(txtIn: "in home mode")
+        txtToSpeech.say(txtIn: "in navigation mode")
     }
     
     public override func viewDidLoad() {
@@ -83,8 +83,8 @@ class HomeModeViewController: UIViewController, SpeechToTextDelegate {
         
         if (commands == Commands.outsideMode) {
             self.tabBarController?.selectedIndex = 0
-        }else if(commands == Commands.homeMode){
-            txtToSpeech.say(txtIn: "already in home mode")
+        }else if(commands == Commands.NaviMode){
+            txtToSpeech.say(txtIn: "already in navigation mode")
         }else if(commands.starts(with: Commands.find)) {
             
         }else {

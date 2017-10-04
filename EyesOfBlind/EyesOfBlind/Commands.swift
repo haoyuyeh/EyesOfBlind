@@ -21,7 +21,7 @@ class Commands {
     // stop the guiding tiles function
     static let stop = "stop"
     /// change to home mode
-    static let homeMode = "home mode"
+    static let NaviMode = "navigation"
     /// find object under home mode
     static let find = "find"
     

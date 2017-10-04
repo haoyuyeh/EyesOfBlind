@@ -145,7 +145,7 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     private func processCommand(command:String) {
         let commands = command.lowercased()
         
-        if (commands == Commands.homeMode) {
+        if (commands == Commands.NaviMode) {
             self.tabBarController?.selectedIndex = 1
         }else if(commands == Commands.outsideMode){
             txtToSpeech.say(txtIn: "already in outside mode")
