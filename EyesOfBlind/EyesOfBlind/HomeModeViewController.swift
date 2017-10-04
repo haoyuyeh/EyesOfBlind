@@ -9,7 +9,7 @@
 import UIKit
 import Speech
 
-class HomeModeViewController: UIViewController, FrameExtractorDelegate, SpeechToTextDelegate {
+class HomeModeViewController: UIViewController, SpeechToTextDelegate {
 
     /****************************
      variables for voice control
@@ -25,18 +25,6 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate, SpeechTo
      ****************************/
     @IBOutlet var singleTap: UITapGestureRecognizer!
     var canSingleTap = true
-
-    /************************************
-     variable for camera frame extractor
-     ***********************************/
-    
-    private var viewExtractor = FrameExtractor()
-    /// all the unprocessed images from camera
-    var imageQueue = Queue<UIImage>()
-    /// use to call the getImage function every time interval
-    private var imageExtractTimer = Timer()
-    /// unit is second which can be float number
-    private let photoTimeInterval = 1.0
     
     /*************************
      viewController functions
@@ -44,28 +32,11 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate, SpeechTo
     
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in home mode")
-        
-        viewExtractor.startRunningCaptureSession()
-        
-        // re-activate the timer
-//        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        viewExtractor.stopRunningCaptureSession()
-        
-        // invalidate the timer
-//        imageExtractTimer.invalidate()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        print("Receive Memory Warning")
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         // assign delegate to this class
-        viewExtractor.delegate = self
         voiceToText.delegate = self
         
         /*
@@ -115,45 +86,9 @@ class HomeModeViewController: UIViewController, FrameExtractorDelegate, SpeechTo
         }else if(commands == Commands.homeMode){
             txtToSpeech.say(txtIn: "already in home mode")
         }else if(commands.starts(with: Commands.find)) {
-            /*
-             implement finding object code here
-             */
-            let object = retrieveObject(sentence: commands)
-            print(object)
+            
         }else {
             txtToSpeech.say(txtIn: "no match command, say again")
         }
     }
-    
-    /*************************
-     FrameExtractor functions
-     ************************/
-    
-    /**
-     delegate function: get captured image from FrameExtractor
-     */
-    func returnImage(_ image: UIImage?) {
-        imageQueue.enqueue(image!)
-        print("num of stored images: \(imageQueue.count)")
-    }
-    
-    /**
-     use to retrieve object name from find command
-     */
-    private func retrieveObject(sentence:String) -> String {
-        // remove command and treat others as object
-        let strs = sentence.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
-        return String(strs[1])
-    }
-    
-    /**
-     tell FrameExtractor class to capture image
-     */
-    @objc func getImage() {
-        viewExtractor.captureImage()
-    }
-    
-    /***********************
-     OpenCV functions
-     ***********************/
 }
