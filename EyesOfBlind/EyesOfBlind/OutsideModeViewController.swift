@@ -32,6 +32,7 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
      ************************************/
     
     private var viewExtractor = FrameExtractor()
+    var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     /// all the unprocessed images from camera
     private var imageQueue = Queue<UIImage>()
     /// use to call the getImage function every time interval
@@ -79,7 +80,6 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in outside mode")
-        
         viewExtractor.startRunningCaptureSession()
         
         // re-activate the timer
@@ -165,6 +165,14 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     /*******************************************
      FrameExtractor and Guiding Tiles functions
      ******************************************/
+    
+    func setupPreviewLayer(_ captureSession: AVCaptureSession?) {
+        cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
+        cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+        cameraPreviewLayer?.frame = self.view.frame
+        self.view.layer.insertSublayer(cameraPreviewLayer!, at: 0)
+    }
     
     /**
      delegate function: get captured image from FrameExtractor

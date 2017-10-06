@@ -12,7 +12,10 @@ import AVFoundation
  use this protocol to pass data to other class
  */
 protocol FrameExtractorDelegate: class {
+    // return the image captured by camera
     func returnImage(_ image: UIImage?)
+    // show what camera see in the screen
+    func setupPreviewLayer(_ captureSession : AVCaptureSession?)
 }
 
 class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
@@ -82,6 +85,11 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
     /**
      */
     func startRunningCaptureSession() {
+        /**
+         setupPreviewLayer cannot be placed in init, because it will set up view layer,
+         however, when viewController instanciate the object, the view still not be construct. therefore, it never be called.
+         */
+        delegate?.setupPreviewLayer(captureSession)
         captureSession.startRunning()
     }
     /**
