@@ -80,6 +80,7 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
      */
     func captureImage() {
         let settings = AVCapturePhotoSettings()
+        // this will automatically call didFinishProcessingPhoto
         photoOutput?.capturePhoto(with: settings, delegate: self)
     }
     /**

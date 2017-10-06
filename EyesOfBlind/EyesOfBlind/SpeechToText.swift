@@ -120,11 +120,6 @@ public class SpeechToText:NSObject, SFSpeechRecognizerDelegate {
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
                 self.delegate?.returnTranscript(self.finalTranscript)
-
-                // when ending the transcription, feedback with a voice instruction
-//                if isFinal {
-//                    self.delegate?.returnTranscript(self.finalTranscript)
-//                }
             }
         }
         // adding audio input to recognitionRequest

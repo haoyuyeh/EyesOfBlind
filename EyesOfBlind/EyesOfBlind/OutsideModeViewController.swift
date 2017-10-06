@@ -45,6 +45,7 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
      ***********************************/
     
     private var image1:UIImage? = nil
+    private var threshold = 35.0
     private var alertTimer = Timer()
     private var alertSwitch = true
     
@@ -53,7 +54,6 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
      ****************************************/
     @IBOutlet weak var txtIn: UITextField!
     @IBOutlet weak var timeIn: UITextField!    
-    private var threshold = 35.0
     
     @IBAction func getTime(_ sender: UIButton) {
         if let time = timeIn.text {
@@ -81,9 +81,6 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     override func viewWillAppear(_ animated: Bool) {
         txtToSpeech.say(txtIn: "in outside mode")
         viewExtractor.startRunningCaptureSession()
-        
-        // re-activate the timer
-//        imageExtractTimer = Timer.scheduledTimer(timeInterval: photoTimeInterval, target: self, selector: #selector(OutsideModeViewController.getImage), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -99,7 +96,7 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        // assign delegate of viewExtractor and voiceToText to this class
+        // assign delegate to this class
         viewExtractor.delegate = self
         voiceToText.delegate = self
         txtIn.delegate = self
@@ -134,7 +131,6 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     func returnTranscript(_ transcript: String) {
         voiceCommand = ""
         voiceCommand = transcript
-        print(voiceCommand)
         processCommand(command: self.voiceCommand)
         // enable single tap
         canSingleTap = true
@@ -166,6 +162,9 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
      FrameExtractor and Guiding Tiles functions
      ******************************************/
     
+    /**
+     delegate function: show what camera see in the screen
+     */
     func setupPreviewLayer(_ captureSession: AVCaptureSession?) {
         cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
         cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -202,7 +201,6 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
                         alertTimer = Timer.scheduledTimer(withTimeInterval: blockTime, repeats: false, block: { (alertTimer) in
                             self.turnOnAlert()
                         })
-                        print(alertSwitch)
                     }
                 }else {
                     // no need to change direction, therefore, change the base of comparision
@@ -216,7 +214,6 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
                         alertTimer = Timer.scheduledTimer(withTimeInterval: blockTime, repeats: false, block: { (alertTimer) in
                             self.turnOnAlert()
                         })
-                        print(alertSwitch)
                     }
                 }else {
                     image1 = image2
@@ -227,7 +224,6 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         }else {
             print("get image2 from queue failed")
         }
-        print("num of stored images: \(imageQueue.count)")
     }
     
     @objc private func turnOnAlert() {
