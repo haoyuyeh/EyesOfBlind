@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4E595BD21F87750200EDEB33 /* QSTodoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E595BD01F87750200EDEB33 /* QSTodoDataModel.xcdatamodeld */; };
-		4E595BD31F87758900EDEB33 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BCF1F87743D00EDEB33 /* opencv2.framework */; };
 		4E595BD41F87758900EDEB33 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BCE1F87742E00EDEB33 /* MicrosoftAzureMobile.framework */; };
 		4E595BD61F87759200EDEB33 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BD51F87759200EDEB33 /* WebKit.framework */; };
 		4E595BD81F87759B00EDEB33 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BD71F87759B00EDEB33 /* Security.framework */; };
@@ -61,7 +60,6 @@
 
 /* Begin PBXFileReference section */
 		4E595BCE1F87742E00EDEB33 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = SOURCE_ROOT; };
-		4E595BCF1F87743D00EDEB33 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = SOURCE_ROOT; };
 		4E595BD11F87750200EDEB33 /* QSTodoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QSTodoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		4E595BD51F87759200EDEB33 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		4E595BD71F87759B00EDEB33 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -102,7 +100,6 @@
 				4E595BDA1F8775A700EDEB33 /* SafariServices.framework in Frameworks */,
 				4E595BD81F87759B00EDEB33 /* Security.framework in Frameworks */,
 				4E595BD61F87759200EDEB33 /* WebKit.framework in Frameworks */,
-				4E595BD31F87758900EDEB33 /* opencv2.framework in Frameworks */,
 				4E595BD41F87758900EDEB33 /* MicrosoftAzureMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,7 +160,6 @@
 		9B8660161F6FB05800F6C02D /* EyesOfBlind */ = {
 			isa = PBXGroup;
 			children = (
-				4E595BCF1F87743D00EDEB33 /* opencv2.framework */,
 				4E595BCE1F87742E00EDEB33 /* MicrosoftAzureMobile.framework */,
 				9B86604A1F6FB0F300F6C02D /* Supporting Files */,
 				9B8660491F6FB0E700F6C02D /* Models */,
