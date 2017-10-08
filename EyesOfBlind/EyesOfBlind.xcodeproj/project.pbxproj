@@ -7,8 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E595BD21F87750200EDEB33 /* QSTodoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E595BD01F87750200EDEB33 /* QSTodoDataModel.xcdatamodeld */; };
+		4E595BD31F87758900EDEB33 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BCF1F87743D00EDEB33 /* opencv2.framework */; };
+		4E595BD41F87758900EDEB33 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BCE1F87742E00EDEB33 /* MicrosoftAzureMobile.framework */; };
+		4E595BD61F87759200EDEB33 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BD51F87759200EDEB33 /* WebKit.framework */; };
+		4E595BD81F87759B00EDEB33 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BD71F87759B00EDEB33 /* Security.framework */; };
+		4E595BDA1F8775A700EDEB33 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E595BD91F8775A700EDEB33 /* SafariServices.framework */; };
+		4E595BDC1F87787200EDEB33 /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E595BDB1F87787200EDEB33 /* ToDoTableViewController.swift */; };
+		4E69A5EA1F87D29A008148AB /* ToDoItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E69A5E91F87D29A008148AB /* ToDoItemViewController.swift */; };
+		4E69A5EC1F886E5C008148AB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E69A5EB1F886E5C008148AB /* MapKit.framework */; };
 		9B0D3E1C1F7F7440005CEFEF /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B0D3E1B1F7F7440005CEFEF /* OpenCVWrapper.mm */; };
-		9B4224E51F81C84100C4C943 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4224E41F81C71300C4C943 /* opencv2.framework */; };
 		9B8660181F6FB05800F6C02D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8660171F6FB05800F6C02D /* AppDelegate.swift */; };
 		9B86601A1F6FB05800F6C02D /* OutsideModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8660191F6FB05800F6C02D /* OutsideModeViewController.swift */; };
 		9B86601C1F6FB05800F6C02D /* NavigationModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B86601B1F6FB05800F6C02D /* NavigationModeViewController.swift */; };
@@ -52,10 +60,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E595BCE1F87742E00EDEB33 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = SOURCE_ROOT; };
+		4E595BCF1F87743D00EDEB33 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = SOURCE_ROOT; };
+		4E595BD11F87750200EDEB33 /* QSTodoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QSTodoDataModel.xcdatamodel; sourceTree = "<group>"; };
+		4E595BD51F87759200EDEB33 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		4E595BD71F87759B00EDEB33 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4E595BD91F8775A700EDEB33 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		4E595BDB1F87787200EDEB33 /* ToDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
+		4E69A5E91F87D29A008148AB /* ToDoItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemViewController.swift; sourceTree = "<group>"; };
+		4E69A5EB1F886E5C008148AB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9B0D3E191F7F7440005CEFEF /* EyesOfBlind-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EyesOfBlind-Bridging-Header.h"; sourceTree = "<group>"; };
 		9B0D3E1A1F7F7440005CEFEF /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		9B0D3E1B1F7F7440005CEFEF /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
-		9B4224E41F81C71300C4C943 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		9B8660141F6FB05800F6C02D /* EyesOfBlind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyesOfBlind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8660171F6FB05800F6C02D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B8660191F6FB05800F6C02D /* OutsideModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsideModeViewController.swift; sourceTree = "<group>"; };
@@ -82,7 +98,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B4224E51F81C84100C4C943 /* opencv2.framework in Frameworks */,
+				4E69A5EC1F886E5C008148AB /* MapKit.framework in Frameworks */,
+				4E595BDA1F8775A700EDEB33 /* SafariServices.framework in Frameworks */,
+				4E595BD81F87759B00EDEB33 /* Security.framework in Frameworks */,
+				4E595BD61F87759200EDEB33 /* WebKit.framework in Frameworks */,
+				4E595BD31F87758900EDEB33 /* opencv2.framework in Frameworks */,
+				4E595BD41F87758900EDEB33 /* MicrosoftAzureMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +127,10 @@
 		9B0D3E1D1F7F8B3B005CEFEF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E69A5EB1F886E5C008148AB /* MapKit.framework */,
+				4E595BD91F8775A700EDEB33 /* SafariServices.framework */,
+				4E595BD71F87759B00EDEB33 /* Security.framework */,
+				4E595BD51F87759200EDEB33 /* WebKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,6 +145,7 @@
 				9B8660381F6FB05800F6C02D /* EyesOfBlindUITests */,
 				9B8660151F6FB05800F6C02D /* Products */,
 				9B0D3E191F7F7440005CEFEF /* EyesOfBlind-Bridging-Header.h */,
+				4E595BD01F87750200EDEB33 /* QSTodoDataModel.xcdatamodeld */,
 				9B0D3E1D1F7F8B3B005CEFEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -137,7 +163,8 @@
 		9B8660161F6FB05800F6C02D /* EyesOfBlind */ = {
 			isa = PBXGroup;
 			children = (
-				9B4224E41F81C71300C4C943 /* opencv2.framework */,
+				4E595BCF1F87743D00EDEB33 /* opencv2.framework */,
+				4E595BCE1F87742E00EDEB33 /* MicrosoftAzureMobile.framework */,
 				9B86604A1F6FB0F300F6C02D /* Supporting Files */,
 				9B8660491F6FB0E700F6C02D /* Models */,
 				9B8660481F6FB0D200F6C02D /* Controllers */,
@@ -182,6 +209,8 @@
 				9BC8B6611F6FFFD0002047FA /* Commands.swift */,
 				9BC39A1F1F792CBE00EEA504 /* FrameExtractor.swift */,
 				9BC39A231F7A264400EEA504 /* Queue.swift */,
+				4E595BDB1F87787200EDEB33 /* ToDoTableViewController.swift */,
+				4E69A5E91F87D29A008148AB /* ToDoItemViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -272,9 +301,17 @@
 				TargetAttributes = {
 					9B8660131F6FB05800F6C02D = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 73PJ5HL78M;
+						DevelopmentTeam = W3T73D532X;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					9B8660291F6FB05800F6C02D = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -345,10 +382,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B86601C1F6FB05800F6C02D /* NavigationModeViewController.swift in Sources */,
+				4E595BD21F87750200EDEB33 /* QSTodoDataModel.xcdatamodeld in Sources */,
 				9BC8B6621F6FFFD0002047FA /* Commands.swift in Sources */,
 				9B8660501F6FB53400F6C02D /* TextToSpeech.swift in Sources */,
+				4E595BDC1F87787200EDEB33 /* ToDoTableViewController.swift in Sources */,
 				9BC39A241F7A264400EEA504 /* Queue.swift in Sources */,
 				9BC39A201F792CBE00EEA504 /* FrameExtractor.swift in Sources */,
+				4E69A5EA1F87D29A008148AB /* ToDoItemViewController.swift in Sources */,
 				9B0D3E1C1F7F7440005CEFEF /* OpenCVWrapper.mm in Sources */,
 				9B86604C1F6FB4E100F6C02D /* SpeechToText.swift in Sources */,
 				9B8660181F6FB05800F6C02D /* AppDelegate.swift in Sources */,
@@ -529,8 +569,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 73PJ5HL78M;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/EyesOfBlind";
+				DEVELOPMENT_TEAM = W3T73D532X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/EyesOfBlind",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = EyesOfBlind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.edu.au.782692.EyesOfBlind;
@@ -547,8 +590,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 73PJ5HL78M;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/EyesOfBlind";
+				DEVELOPMENT_TEAM = W3T73D532X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/EyesOfBlind",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = EyesOfBlind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.edu.au.782692.EyesOfBlind;
@@ -661,6 +707,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4E595BD01F87750200EDEB33 /* QSTodoDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4E595BD11F87750200EDEB33 /* QSTodoDataModel.xcdatamodel */,
+			);
+			currentVersion = 4E595BD11F87750200EDEB33 /* QSTodoDataModel.xcdatamodel */;
+			name = QSTodoDataModel.xcdatamodeld;
+			path = EyesOfBlind/QSTodoDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9B86600C1F6FB05700F6C02D /* Project object */;
 }
