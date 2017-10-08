@@ -177,35 +177,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address Name (eg: home):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGI-jy-F6O">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Name (eg: home):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGI-jy-F6O">
                                 <rect key="frame" x="16" y="104" width="205" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address content(eg. 100 Swanston Street)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21o-0e-W2S">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address content(eg. 100 Swanston Street)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21o-0e-W2S">
                                 <rect key="frame" x="16" y="208" width="325" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-ph-hyp" userLabel="Text">
-                                <rect key="frame" x="16" y="147" width="560" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-ph-hyp" userLabel="Text">
+                                <rect key="frame" x="16" y="147" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="KIh-3Z-K3f"/>
+                                    <constraint firstAttribute="height" constant="30" id="mg7-j1-Erg"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qBn-MT-2Yg" userLabel="Address Text">
-                                <rect key="frame" x="16" y="249" width="560" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qBn-MT-2Yg" userLabel="Address Text">
+                                <rect key="frame" x="16" y="249" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5pA-eP-ILn"/>
+                                    <constraint firstAttribute="width" constant="343" id="OsI-Dv-4km"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="fyq-ph-hyp" secondAttribute="trailing" constant="-201" id="GIR-2T-kRI"/>
-                            <constraint firstAttribute="trailing" secondItem="qBn-MT-2Yg" secondAttribute="trailing" constant="-201" id="m3F-wJ-HGU"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="trailing" secondItem="fyq-ph-hyp" secondAttribute="trailing" id="0Xp-e7-8Qt"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="leading" secondItem="fyq-ph-hyp" secondAttribute="leading" id="2U3-5H-wk8"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="top" secondItem="OhD-ne-ptm" secondAttribute="top" constant="147" id="38i-De-OxT"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="top" secondItem="OhD-ne-ptm" secondAttribute="top" constant="249" id="76b-SX-CLW"/>
+                            <constraint firstItem="21o-0e-W2S" firstAttribute="top" secondItem="fyq-ph-hyp" secondAttribute="bottom" constant="31" id="8WG-Cx-7cp"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="leading" secondItem="GGI-jy-F6O" secondAttribute="leading" id="9Eh-hs-tyZ"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="21o-0e-W2S" secondAttribute="leading" id="BZd-Bb-FTt"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="leading" secondItem="OhD-ne-ptm" secondAttribute="leadingMargin" id="Bff-Lu-qN8"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="top" secondItem="21o-0e-W2S" secondAttribute="bottom" constant="20" id="Dse-37-GBb"/>
+                            <constraint firstAttribute="trailing" secondItem="GGI-jy-F6O" secondAttribute="trailing" constant="154" id="F4w-tP-Csr"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GGI-jy-F6O" secondAttribute="leading" id="Fi5-ph-lFa"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="top" secondItem="OhD-ne-ptm" secondAttribute="top" constant="147" id="IFb-Kc-9EA"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="trailing" secondItem="OhD-ne-ptm" secondAttribute="trailingMargin" id="JTt-tm-y6h"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="leading" secondItem="OhD-ne-ptm" secondAttribute="leading" constant="16" id="L7a-FK-eG9"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="top" secondItem="OhD-ne-ptm" secondAttribute="top" constant="249" id="NK4-NV-eD0"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="trailing" secondItem="qBn-MT-2Yg" secondAttribute="trailing" id="NPY-HD-LTD"/>
+                            <constraint firstAttribute="trailing" secondItem="21o-0e-W2S" secondAttribute="trailing" constant="34" id="NS4-o5-7OW"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="trailing" secondItem="OhD-ne-ptm" secondAttribute="trailingMargin" id="RNy-g1-VPa"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="leading" secondItem="OhD-ne-ptm" secondAttribute="leadingMargin" id="UkP-VP-X8Z"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="leading" secondItem="OhD-ne-ptm" secondAttribute="leading" constant="16" id="VkC-Mx-ysw"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="centerX" secondItem="OhD-ne-ptm" secondAttribute="centerX" id="WK7-Un-9At"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="centerX" secondItem="OhD-ne-ptm" secondAttribute="centerX" id="Zgx-Os-xn7"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="trailing" secondItem="OhD-ne-ptm" secondAttribute="trailingMargin" id="bb2-LU-X9G"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="centerX" secondItem="qBn-MT-2Yg" secondAttribute="centerX" id="cJQ-J4-RAz"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="leading" secondItem="OhD-ne-ptm" secondAttribute="leadingMargin" id="dqN-l6-o2t"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="leading" secondItem="21o-0e-W2S" secondAttribute="leading" id="eTF-lA-uMa"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="centerX" secondItem="fyq-ph-hyp" secondAttribute="centerX" id="eWM-X8-Xeu"/>
+                            <constraint firstItem="z2Z-0a-bf0" firstAttribute="top" secondItem="qBn-MT-2Yg" secondAttribute="bottom" constant="339" id="kiJ-1v-C4S"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="top" secondItem="GGI-jy-F6O" secondAttribute="bottom" constant="22" id="mu5-cn-xhI"/>
+                            <constraint firstItem="qBn-MT-2Yg" firstAttribute="leading" secondItem="OhD-ne-ptm" secondAttribute="leading" constant="16" id="uEy-03-rQa"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="leading" secondItem="qBn-MT-2Yg" secondAttribute="leading" id="yhT-Eu-4ee"/>
+                            <constraint firstItem="fyq-ph-hyp" firstAttribute="leading" secondItem="OhD-ne-ptm" secondAttribute="leading" constant="16" id="ypJ-jz-EEc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add address" id="b14-29-doC">
@@ -229,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BV4-Ku-DrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="1109"/>
+            <point key="canvasLocation" x="2004" y="1108.6956521739132"/>
         </scene>
         <!--Azure Mobile Apps-->
         <scene sceneID="15e-t7-soF">
