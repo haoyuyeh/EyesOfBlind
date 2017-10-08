@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:EyesOfBlind.xcodeproj">
+      location = "group:../EyesOfBlind/QSTodoDataModel.xcdatamodeld">
+   </FileRef>
+   <FileRef
+      location = "group:../MicrosoftAzureMobile.framework">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
