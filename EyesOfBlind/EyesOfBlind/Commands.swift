@@ -23,6 +23,8 @@ class Commands {
     /// change to home mode
     static let NaviMode = "navigation"
     /// find object under home mode
-    static let find = "find"
+    static let find = "begin"
+    
+    
     
 }
