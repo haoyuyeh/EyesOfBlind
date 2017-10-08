@@ -47,6 +47,7 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
     private func setupCaptureSession() {
         captureSession.sessionPreset = AVCaptureSession.Preset.medium
     }
+    
     /**
      */
     private func setupDevice() {
