@@ -60,7 +60,7 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
                 frontCamera = device
             }
         }
-        currentCamera = frontCamera
+        currentCamera = backCamera
     }
     /**
      */

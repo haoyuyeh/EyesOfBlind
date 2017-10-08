@@ -52,27 +52,27 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
     /*****************************************
      change parameters to improve performance
      ****************************************/
-    @IBOutlet weak var txtIn: UITextField!
-    @IBOutlet weak var timeIn: UITextField!    
-    
-    @IBAction func getTime(_ sender: UIButton) {
-        if let time = timeIn.text {
-            photoTimeInterval = Double(time)!
-        }
-        timeIn.text = ""
-    }
-    
-    @IBAction func getVal(_ sender: UIButton) {
-        if let val = txtIn.text {
-            threshold = Double(val)!
-        }
-        txtIn.text = ""
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+//    @IBOutlet weak var txtIn: UITextField!
+//    @IBOutlet weak var timeIn: UITextField!
+//
+//    @IBAction func getTime(_ sender: UIButton) {
+//        if let time = timeIn.text {
+//            photoTimeInterval = Double(time)!
+//        }
+//        timeIn.text = ""
+//    }
+//
+//    @IBAction func getVal(_ sender: UIButton) {
+//        if let val = txtIn.text {
+//            threshold = Double(val)!
+//        }
+//        txtIn.text = ""
+//    }
+//
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
     
     /*************************
      viewController functions
@@ -99,8 +99,8 @@ class OutsideModeViewController: UIViewController, FrameExtractorDelegate, Speec
         // assign delegate to this class
         viewExtractor.delegate = self
         voiceToText.delegate = self
-        txtIn.delegate = self
-        timeIn.delegate = self
+//        txtIn.delegate = self
+//        timeIn.delegate = self
         /**
          ask authentication for speech recognition
          */

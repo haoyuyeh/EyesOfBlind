@@ -533,7 +533,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/EyesOfBlind";
 				INFOPLIST_FILE = EyesOfBlind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.edu.au.782692.EyesOfBlind;
+				PRODUCT_BUNDLE_IDENTIFIER = AngusYeh.782692.EyesOfBlind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EyesOfBlind-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -551,7 +551,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/EyesOfBlind";
 				INFOPLIST_FILE = EyesOfBlind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.MelbUni.edu.au.782692.EyesOfBlind;
+				PRODUCT_BUNDLE_IDENTIFIER = AngusYeh.782692.EyesOfBlind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EyesOfBlind-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
