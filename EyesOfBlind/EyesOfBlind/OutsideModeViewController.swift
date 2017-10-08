@@ -9,7 +9,7 @@
 import UIKit
 import Speech
 
-class OutsideModeViewController: UIViewController, FrameExtractorDelegate, SpeechToTextDelegate, UITextFieldDelegate {
+class OutsideModeViewController: UIViewController, FrameExtractorDelegate, SpeechToTextDelegate {
 
     /****************************
      variables for voice control

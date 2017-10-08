@@ -63,6 +63,7 @@ class FrameExtractor: NSObject, AVCapturePhotoCaptureDelegate {
         }
         currentCamera = backCamera
     }
+    
     /**
      */
     @available(iOS 11.0, *)
